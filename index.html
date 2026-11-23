@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre Linhas - Jornal Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --vermelho-claro: #fd0343;
+            --vermelho-escuro: #df0039;
+            --azul: #3c3f88;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+            --cinza-medio: #e0e0e0;
+            --cinza-texto: #555555;
+            --cinza-escuro: #333333;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cinza-claro);
+            color: var(--cinza-escuro);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background-color: var(--azul);
+            color: var(--branco);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar .data {
+            font-weight: 600;
+        }
+
+        .top-bar .redes-sociais a {
+            color: var(--branco);
+            margin-left: 15px;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .top-bar .redes-sociais a:hover {
+            color: var(--vermelho-claro);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background-color: var(--branco);
+            padding: 20px 0;
+            border-bottom: 4px solid var(--vermelho-claro);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .header-logo .nome-jornal {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--azul);
+            letter-spacing: -1px;
+        }
+
+        .header-logo .nome-jornal span {
+            color: var(--vermelho-claro);
+        }
+
+        .header-logo .subtitulo {
+            font-size: 0.75rem;
+            color: var(--cinza-texto);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: -5px;
+        }
+
+        .header-busca {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-busca input {
+            padding: 10px 15px;
+            border: 2px solid var(--cinza-medio);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            width: 250px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .header-busca input:focus {
+            border-color: var(--vermelho-claro);
+        }
+
+        .header-busca button {
+            background-color: var(--vermelho-claro);
+            color: var(--branco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .header-busca button:hover {
+            background-color: var(--vermelho-escuro);
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        .nav-principal {
+            background-color: var(--azul);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-principal .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-principal ul {
+            list-style: none;
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-principal ul li a {
+            display: block;
+            color: var(--branco);
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-principal ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--vermelho-claro);
+            transition: width 0.3s;
+        }
+
+        .nav-principal ul li a:hover::after,
+        .nav-principal ul li a.ativo::after {
+            width: 100%;
+        }
+
+        .nav-principal ul li a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-principal ul li a.ativo {
+            background-color: var(--vermelho-claro);
+        }
+
+        .menu-hamburguer {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--branco);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 15px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== BREAKING NEWS ===== */
+        .breaking-news {
+            background-color: var(--vermelho-claro);
+            color: var(--branco);
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .breaking-news .container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .breaking-news .label {
+            background-color: var(--branco);
+            color: var(--vermelho-claro);
+            padding: 5px 15px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-radius: 3px;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .breaking-news .texto {
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            animation: scroll-text 20s linear infinite;
+        }
+
+        @keyframes scroll-text {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* ===== MANCHETE PRINCIPAL ===== */
+        .manchete-section {
+            padding: 30px 0;
+        }
+
+        .manchete-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .manchete-principal {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .manchete-principal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .manchete-principal .imagem {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .manchete-principal .conteudo {
+            padding: 25px;
+        }
+
+        .manchete-principal .categoria {
+            display: inline-block;
+            background-color: var(--vermelho-claro);
+            color: var(--branco);
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .manchete-principal h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: var(--cinza-escuro);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .manchete-principal h1:hover {
+            color: var(--vermelho-claro);
+        }
+
+        .manchete-principal .resumo {
+            color: var(--cinza-texto);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .manchete-principal .meta {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .manchete-principal .meta span {
+            margin-right: 15px;
+        }
+
+        /* ===== SIDEBAR NOTÍCIAS ===== */
+        .sidebar-noticias {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .noticia-lateral {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .noticia-lateral:hover {
+            transform: translateY(-2px);
+        }
+
+        .noticia-lateral .imagem {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .noticia-lateral .conteudo {
+            padding: 15px;
+        }
+
+        .noticia-lateral .categoria {
+            display: inline-block;
+            background-color: var(--azul);
+            color: var(--branco);
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .noticia-lateral h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            color: var(--cinza-escuro);
+            line-height: 1.4;
+        }
+
+        .noticia-lateral h3:hover {
+            color: var(--vermelho-claro);
+        }
+
+        .noticia-lateral .meta {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* ===== SEÇÃO DE NOTÍCIAS ===== */
+        .secao-noticias {
+            padding: 30px 0;
+        }
+
+        .secao-titulo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--vermelho-claro);
+        }
+
+        .secao-titulo h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--azul);
+        }
+
+        .secao-titulo .linha {
+            flex: 1;
+            height: 3px;
+            background: linear-gradient(to right, var(--vermelho-claro), transparent);
+        }
+
+        .noticias-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .noticia-card {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .noticia-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .noticia-card .imagem {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .noticia-card .conteudo {
+            padding: 20px;
+        }
+
+        .noticia-card .categoria {
+            display: inline-block;
+            background-color: var(--vermelho-claro);
+            color: var(--branco);
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .noticia-card .categoria.azul {
+            background-color: var(--azul);
+        }
+
+        .noticia-card .categoria.vermelho-escuro {
+            background-color: var(--vermelho-escuro);
+        }
+
+        .noticia-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            color: var(--cinza-escuro);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .noticia-card h3:hover {
+            color: var(--vermelho-claro);
+        }
+
+        .noticia-card .resumo {
+            color: var(--cinza-texto);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .noticia-card .meta {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* ===== SEÇÃO OPINIÃO ===== */
+        .secao-opiniao {
+            background-color: var(--azul);
+            padding: 40px 0;
+            margin: 30px 0;
+        }
+
+        .secao-opiniao .secao-titulo {
+            border-bottom-color: var(--vermelho-claro);
+        }
+
+        .secao-opiniao .secao-titulo h2 {
+            color: var(--branco);
+        }
+
+        .opiniao-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .opiniao-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .opiniao-card:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .opiniao-card .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--vermelho-claro);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--branco);
+            font-weight: 700;
+        }
+
+        .opiniao-card h4 {
+            color: var(--branco);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .opiniao-card .cargo {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .opiniao-card p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            background: linear-gradient(135deg, var(--vermelho-claro), var(--vermelho-escuro));
+            padding: 50px 0;
+            text-align: center;
+            color: var(--branco);
+        }
+
+        .newsletter h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter button {
+            background-color: var(--azul);
+            color: var(--branco);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter button:hover {
+            background-color: var(--branco);
+            color: var(--azul);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--vermelho-claro);
+        }
+
+        .footer-col p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--vermelho-claro);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .footer-logo span {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--branco);
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 992px) {
+            .manchete-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .noticias-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .opiniao-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-logo .nome-jornal {
+                font-size: 2rem;
+            }
+
+            .header-busca input {
+                width: 200px;
+            }
+
+            .nav-principal ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: var(--azul);
+            }
+
+            .nav-principal ul.ativo {
+                display: flex;
+            }
+
+            .menu-hamburguer {
+                display: block;
+            }
+
+            .noticias-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .opiniao-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter form {
+                flex-direction: column;
+            }
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--vermelho-claro);
+            color: var(--branco);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(253, 3, 67, 0.4);
+            border: none;
+            z-index: 999;
+        }
+
+        .scroll-top.visivel {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--vermelho-escuro);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- HEADER -->
+  <div class="header-logo" style="display: flex; flex-direction: column; align-items: center; width: 100%; padding: 15px 0;">
+    <div class="nome-jornal" style="font-family: 'Merriweather', serif; font-size: 3.5rem; font-weight: 900; color: #3c3f88; letter-spacing: -1px; margin-bottom: -32px;">Entre <span style="color: #fd0343;">Linhas</span></div>
+    <div class="subtitulo" style="font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 4px; margin-bottom: -15px;">Jornalismo com profundidade</div>
+    <div style="width: 100%; max-width: 800px; height: 4px; background: linear-gradient(to right, #3c3f88, #fd0343, #3c3f88); border-radius: 2px;"></div>
+</div>
+    </header>
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="nav-principal">
+        <div class="container">
+            <button class="menu-hamburguer" onclick="toggleMenu()">☰ Menu</button>
+            <ul id="nav-menu">
+                <li><a href="#" class="ativo">Início</a></li>
+                <li><a href="#">Política</a></li>
+                <li><a href="#">Economia</a></li>
+                <li><a href="#">Mundo</a></li>
+                <li><a href="#">Tecnologia</a></li>
+                <li><a href="#">Esportes</a></li>
+                <li><a href="#">Cultura</a></li>
+                <li><a href="#">Opinião</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MANCHETE PRINCIPAL -->
+    <section class="manchete-section">
+        <div class="container">
+            <div class="manchete-grid">
+                <article class="manchete-principal" onclick="abrirNoticia('principal')">
+                    <img src="https://picsum.photos/800/400?random=1" alt="Manchete Principal" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria">Política</span>
+                        <h1>Novas reformas econômicas prometem transformar o cenário político nacional nos próximos meses</h1>
+                        <p class="resumo">Especialistas analisam o impacto das mudanças propostas pelo governo e como elas podem afetar a vida dos cidadãos brasileiros nos próximos anos.</p>
+                        <div class="meta">
+                            <span>📅 16 de Novembro de 2026</span>
+                            <span>✍️ Por Maria Silva</span>
+                            <span>⏱️ 8 min de leitura</span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="sidebar-noticias">
+                    <article class="noticia-lateral" onclick="abrirNoticia('lateral1')">
+                        <img src="https://picsum.photos/400/200?random=2" alt="Notícia" class="imagem">
+                        <div class="conteudo">
+                            <span class="categoria">Tecnologia</span>
+                            <h3>Inteligência artificial revoluciona o mercado de trabalho brasileiro</h3>
+                            <div class="meta">Há 2 horas</div>
+                        </div>
+                    </article>
+
+                    <article class="noticia-lateral" onclick="abrirNoticia('lateral2')">
+                        <img src="https://picsum.photos/400/200?random=3" alt="Notícia" class="imagem">
+                        <div class="conteudo">
+                            <span class="categoria">Esportes</span>
+                            <h3>Seleção brasileira se prepara para as eliminatórias da Copa</h3>
+                            <div class="meta">Há 3 horas</div>
+                        </div>
+                    </article>
+
+                    <article class="noticia-lateral" onclick="abrirNoticia('lateral3')">
+                        <img src="https://picsum.photos/400/200?random=4" alt="Notícia" class="imagem">
+                        <div class="conteudo">
+                            <span class="categoria">Economia</span>
+                            <h3>Bolsa de valores atinge recorde histórico nesta segunda-feira</h3>
+                            <div class="meta">Há 4 horas</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE NOTÍCIAS -->
+    <section class="secao-noticias">
+        <div class="container">
+            <div class="secao-titulo">
+                <h2>Últimas Notícias</h2>
+                <div class="linha"></div>
+            </div>
+
+            <div class="noticias-grid">
+                <article class="noticia-card" onclick="abrirNoticia('card1')">
+                    <img src="https://picsum.photos/400/250?random=5" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria">Mundo</span>
+                        <h3>Cúpula internacional discute mudanças climáticas em Genebra</h3>
+                        <p class="resumo">Líderes de mais de 50 países se reúnem para debater novas metas de redução de emissões.</p>
+                        <div class="meta">📅 16/11/2026 · 5 min</div>
+                    </div>
+                </article>
+
+                <article class="noticia-card" onclick="abrirNoticia('card2')">
+                    <img src="https://picsum.photos/400/250?random=6" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria azul">Cultura</span>
+                        <h3>Festival de cinema brasileiro bate recorde de público em 2026</h3>
+                        <p class="resumo">Evento reuniu mais de 200 mil espectadores e lançou 30 novos filmes nacionais.</p>
+                        <div class="meta">📅 16/11/2026 · 4 min</div>
+                    </div>
+                </article>
+
+                <article class="noticia-card" onclick="abrirNoticia('card3')">
+                    <img src="https://picsum.photos/400/250?random=7" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria vermelho-escuro">Saúde</span>
+                        <h3>Nova pesquisa revela benefícios da alimentação mediterrânea</h3>
+                        <p class="resumo">Estudo com 10 mil participantes mostra redução de 30% em doenças cardiovasculares.</p>
+                        <div class="meta">📅 16/11/2026 · 6 min</div>
+                    </div>
+                </article>
+
+                <article class="noticia-card" onclick="abrirNoticia('card4')">
+                    <img src="https://picsum.photos/400/250?random=8" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria">Tecnologia</span>
+                        <h3>Startup brasileira desenvolve app de educação para áreas rurais</h3>
+                        <p class="resumo">Plataforma já atende mais de 50 mil estudantes em regiões com pouco acesso à internet.</p>
+                        <div class="meta">📅 15/11/2026 · 5 min</div>
+                    </div>
+                </article>
+
+                <article class="noticia-card" onclick="abrirNoticia('card5')">
+                    <img src="https://picsum.photos/400/250?random=9" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria azul">Esportes</span>
+                        <h3>Campeonato brasileiro entra na reta final com disputa acirrada</h3>
+                        <p class="resumo">Três times brigam pelo título a apenas 5 rodadas do fim da competição.</p>
+                        <div class="meta">📅 15/11/2026 · 3 min</div>
+                    </div>
+                </article>
+
+                <article class="noticia-card" onclick="abrirNoticia('card6')">
+                    <img src="https://picsum.photos/400/250?random=10" alt="Notícia" class="imagem">
+                    <div class="conteudo">
+                        <span class="categoria vermelho-escuro">Economia</span>
+                        <h3>Inflação desacelera e banco central sinaliza nova queda de juros</h3>
+                        <p class="resumo">Índice ficou abaixo do esperado e mercado projeta alívio para o crédito.</p>
+                        <div class="meta">📅 15/11/2026 · 7 min</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO OPINIÃO -->
+    <section class="secao-opiniao">
+        <div class="container">
+            <div class="secao-titulo">
+                <h2>Opinião & Colunistas</h2>
+                <div class="linha"></div>
+            </div>
+
+            <div class="opiniao-grid">
+                <div class="opiniao-card">
+                    <div class="avatar">MS</div>
+                    <h4>Maria Silva</h4>
+                    <div class="cargo">Editora de Política</div>
+                    <p>"As reformas precisam ser analisadas com cuidado e profundidade..."</p>
+                </div>
+
+                <div class="opiniao-card">
+                    <div class="avatar">JO</div>
+                    <h4>João Oliveira</h4>
+                    <div class="cargo">Analista Econômico</div>
+                    <p>"O mercado responde positivamente às novas medidas do governo..."</p>
+                </div>
+
+                <div class="opiniao-card">
+                    <div class="avatar">AC</div>
+                    <h4>Ana Costa</h4>
+                    <div class="cargo">Colunista de Tecnologia</div>
+                    <p>"A IA está transformando tudo, mas precisamos de regulação..."</p>
+                </div>
+
+                <div class="opiniao-card">
+                    <div class="avatar">RF</div>
+                    <h4>Ricardo Ferreira</h4>
+                    <div class="cargo">Editor de Esportes</div>
+                    <p>"A seleção mostra evolução tática importante nas últimas partidas..."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>📬 Receba as principais notícias</h2>
+            <p>Assine nossa newsletter e receba as manchetes do dia diretamente no seu e-mail</p>
+            <form onsubmit="assinarNewsletter(event)">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit">Assinar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="imagens/logo.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; margin-right: -30px;">
+                        <span>Entre Linhas</span>
+                    </div>
+                    <p>O Entre Linhas nasce com o propósito de dar voz, visibilidade e protagonismo às iniciativas que movimentam o ecossistema da Espro. Mais do que registrar o que está na superfície, nossa missão é investigar e apresentar as histórias, os desafios e os bastidores de cada empresa criada no curso.
+Através de uma cobertura dinâmica e envolvente, conectamos o público à essência desses negócios, mostrando o impacto de quem faz acontecer por trás das câmeras e dos microfones.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Editorias</h3>
+                    <ul>
+                        <li><a href="#">Política</a></li>
+                        <li><a href="#">Economia</a></li>
+                        <li><a href="#">Mundo</a></li>
+                        <li><a href="#">Tecnologia</a></li>
+                        <li><a href="#">Esportes</a></li>
+                        <li><a href="#">Cultura</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="#">Sobre nós</a></li>
+                        <li><a href="#">Expediente</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Anuncie</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="#">📧 turma15388@gmail.com</a></li>
+                        <li><a href="#">📞 (11) 4002-8922</a></li>
+                        <li><a href="#">📍 São Paulo, SP</a></li>
+                        <li><a href="https://www.instagram.com/entre_linhas_jornal/" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Entre Linhas — Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Data atual
+        function atualizarData() {
+            const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const hoje = new Date();
+            const dataFormatada = `${dias[hoje.getDay()]}, ${hoje.getDate()} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()}`;
+            document.getElementById('data-atual').textContent = dataFormatada;
+        }
+        atualizarData();
+
+        // Menu hamburguer
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('ativo');
+        }
+
+        // Scroll to top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visivel');
+            } else {
+                scrollTopBtn.classList.remove('visivel');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Busca
+        function buscarNoticias() {
+            const termo = document.getElementById('busca-input').value;
+            if (termo.trim()) {
+                alert(`Buscando por: "${termo}"\n\nFuncionalidade de busca em desenvolvimento.`);
+            }
+        }
+
+        // Enter na busca
+        document.getElementById('busca-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                buscarNoticias();
+            }
+        });
+
+        // Abrir notícia
+        function abrirNoticia(id) {
+            alert(`Abrindo notícia: ${id}\n\nPágina de notícia completa em desenvolvimento.`);
+        }
+
+        // Newsletter
+        function assinarNewsletter(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            alert(`✅ E-mail ${email} cadastrado com sucesso!\n\nVocê receberá nossas principais notícias.`);
+            e.target.reset();
+        }
+
+        // Navegação ativa
+        document.querySelectorAll('.nav-principal ul li a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-principal ul li a').forEach(l => l.classList.remove('ativo'));
+                this.classList.add('ativo');
+            });
+        });
+
+        // Breaking news rotativo
+        const breakingNews = [
+            'Últimas notícias em tempo real — Acompanhe as principais manchetes do dia',
+            'Reformas econômicas aprovadas — Veja o que muda para os cidadãos',
+            'Seleção brasileira convocada para as eliminatórias',
+            'Bolsa de valores atinge novo recorde histórico',
+            'Cúpula do clima termina com acordo histórico entre nações'
+        ];
+        let breakingIndex = 0;
+        setInterval(() => {
+            breakingIndex = (breakingIndex + 1) % breakingNews.length;
+            document.getElementById('breaking-text').textContent = breakingNews[breakingIndex];
+        }, 5000);
+    </script>
+
+</body>
+</html>
